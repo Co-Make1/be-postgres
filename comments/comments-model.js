@@ -75,7 +75,6 @@ function remove(id) {
 module.exports = {
   add,
   find,
-  findBy,
   findById,
   findByIssueId,
   update,
