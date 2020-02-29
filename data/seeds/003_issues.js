@@ -1,7 +1,8 @@
 exports.seed = async function(knex) {
-  await knex("issues").del();
+  await knex("issues").truncate();
   await knex("issues").insert([
     {
+      id: 1,
       issue: "pothole",
       issue_description: "I'm an issue description",
       photo:
@@ -10,9 +11,11 @@ exports.seed = async function(knex) {
       city: "Chicago",
       state: "Illinois",
       zip_code: 60649,
+      user_id: 1,
       hazard_level: 1
     },
     {
+      id: 2,
       issue: "car crash",
       issue_description: "I'm an issue description",
       photo:
@@ -21,6 +24,7 @@ exports.seed = async function(knex) {
       city: "Chicago",
       state: "Illinois",
       zip_code: 60619,
+      user_id: 1,
       hazard_level: 3
     }
   ]);
