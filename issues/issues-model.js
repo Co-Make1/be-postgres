@@ -1,7 +1,8 @@
 const db = require("../data/db-config");
+const commentsModel = require("../comments/comments-model")
 
 function find() {
-  return db("issues as i")
+ return db("issues as i")
     .leftJoin("users as u", "i.user_id", "u.id")
     .leftJoin("hazard_levels as h", "i.hazard_level", "h.id")
     .select(
@@ -19,6 +20,7 @@ function find() {
       "i.created_at"
     )
     .orderBy("i.upvotes", "desc");
+
 }
 
 async function findBy(filter) {
@@ -55,6 +57,8 @@ function findById(id) {
       "i.created_at"
     )
     .orderBy("i.upvotes", "desc");
+
+    // const comments = await db("comments as c").leftJoin()
 }
 
 function findByUserId(id) {

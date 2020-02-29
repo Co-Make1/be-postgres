@@ -16,11 +16,7 @@ function find() {
     .orderBy("c.created_at", "asc");
 }
 
-function findBy(filter) {
-  return db("comments")
-    .where(filter)
-    .first("id", "username", "is_admin");
-}
+
 
 async function add(comment) {
   const [id] = await db("comments").insert(comment);
