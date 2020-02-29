@@ -35,7 +35,6 @@ exports.up = async function(knex) {
     issues.integer("upvotes");
     issues
       .integer("user_id")
-      .notNullable()
       .unsigned()
       .references("id")
       .inTable("users")
@@ -43,7 +42,6 @@ exports.up = async function(knex) {
       .onDelete("CASCADE");
     issues
       .integer("hazard_level")
-      .notNullable()
       .unsigned()
       .references("id")
       .inTable("hazard_levels")
@@ -56,7 +54,6 @@ exports.up = async function(knex) {
     comments.string("comment").notNullable();
     comments
       .integer("issue_id")
-      .notNullable()
       .unsigned()
       .references("id")
       .inTable("issues")
@@ -64,7 +61,6 @@ exports.up = async function(knex) {
       .onDelete("CASCADE");
     comments
       .integer("user_id")
-      .notNullable()
       .unsigned()
       .references("id")
       .inTable("users")
