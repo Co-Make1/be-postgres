@@ -18,17 +18,17 @@ router.get("/", restricted, async (req, res, next) => {
   }
 });
 
-router.get("/:issueId", validateId, restricted, async (req, res, next) => {
+router.get("/:id", restricted, validateId,  async (req, res, next) => {
   try {
-    const { issueId } = req.params;
-    const user = await db.findById(issueId);
+    const { id } = req.params;
+    const user = await db.findById(id);
     res.json(user);
   } catch (err) {
     next(err);
   }
 });
 
-router.put("/:id", restricted, async (req, res, next) => {
+router.put("/:id", restricted, validateId, async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await db.update(id, req.body);
@@ -38,7 +38,7 @@ router.put("/:id", restricted, async (req, res, next) => {
   }
 });
 
-router.delete("/:id", restricted, async (req, res, next) => {
+router.delete("/:id", restricted, validateId,async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedCount = await db.remove(id);
