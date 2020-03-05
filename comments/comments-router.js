@@ -12,10 +12,10 @@ const db = require("./comments-model");
 
 router.get(
   "/allComments",
-  restricted,
-  validateId,
-  validateIssueId,
-  validateIssueId,
+  // restricted,
+  // validateId,
+  // validateIssueId,
+  // validateIssueId,
   async (req, res, next) => {
     try {
       const comments = await db.find();
@@ -28,9 +28,9 @@ router.get(
 
 router.get(
   "/",
-  restricted,
-  validateId,
-  validateIssueId,
+  // restricted,
+  // validateId,
+  // validateIssueId,
   async (req, res, next) => {
     const { issueId } = req.params;
     try {
@@ -44,13 +44,13 @@ router.get(
 
 router.post(
   "/",
-  restricted,
+  // restricted,
   validateId,
   validator("comment"),
   validateIssueId,
   async (req, res, next) => {
     let { body } = req;
-    body = { ...body, issue_id: req.params.issueId, user_id: req.params.id };
+    body = { ...body, issue_id: req.params.issue_id, user_id: req.params.id };
     try {
       console.log(body);
       const newComment = await db.add(body);
@@ -63,7 +63,7 @@ router.post(
 
 router.get(
   "/:commentId",
-  restricted,
+  // restricted,
   validateId,
   validateCommentId,
   validateIssueId,
@@ -80,7 +80,7 @@ router.get(
 
 router.put(
   "/:commentId",
-  restricted,
+  // restricted,
   validateId,
   validateCommentId,
   validateCommentEditingRights,
@@ -98,7 +98,7 @@ router.put(
 
 router.delete(
   "/:commentId",
-  restricted,
+  // restricted,
   validateId,
   validateCommentId,
   validateCommentEditingRights,

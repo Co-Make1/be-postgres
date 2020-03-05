@@ -2,8 +2,8 @@ const db = require("../data/db-config");
 
 function find() {
   return db("comments as c")
+  .leftJoin("issues as i", "c.issue_id", "i.id")
     .leftJoin("users as u", "c.user_id", "u.id")
-    .leftJoin("issues as i", "c.issue_id", "i.id")
     .select(
       "c.id",
       "c.user_id",
@@ -16,7 +16,11 @@ function find() {
     .orderBy("c.created_at", "asc");
 }
 
-
+function findBy(filter) {
+  return db("comments")
+    .where(filter)
+    .first("id", "username", "is_admin");
+}
 
 async function add(comment) {
   const [id] = await db("comments").insert(comment);
@@ -75,6 +79,7 @@ function remove(id) {
 module.exports = {
   add,
   find,
+  findBy,
   findById,
   findByIssueId,
   update,
