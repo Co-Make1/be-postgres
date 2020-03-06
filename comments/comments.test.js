@@ -43,13 +43,13 @@ beforeAll(async () => {
 });
 describe("Comments Routers", () => {
   test("Get All Comments", async () => {
-    // await supertest(server)
-    //   .post("/api/auth/register")
-    //   .send(user);
+    await supertest(server)
+      .post("/api/auth/register")
+      .send(user);
 
-    // await supertest(server)
-    //   .post("/api/auth/login")
-    //   .send({ username: "User", password: "password" });
+    await supertest(server)
+      .post("/api/auth/login")
+      .send({ username: "User", password: "password" });
 
     await supertest(server).get("/api/users/1/issues");
 
