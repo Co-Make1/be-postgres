@@ -1,40 +1,39 @@
-const supertest = require("supertest")
-const server = require("../index")
-const db = require("../data/db-config")
-
+const supertest = require("supertest");
+const server = require("../index");
+const db = require("../data/db-config");
 
 beforeEach(async () => {
-  await db("users").truncate()
-  await db("issues").truncate()
-  await db.seed.run
-})
+  await db("users").truncate();
+  await db("issues").truncate();
+  await db.seed.run;
+});
 
-afterAll(async () => { 
-  await db.seed.run
-  await db.destroy()
+afterAll(async () => {
+  await db.seed.run;
+  await db.destroy();
 });
 
 test("Test Route", async () => {
-  const res = await supertest(server).get("/")
-  expect(res.status).toBe(200)
+  const res = await supertest(server).get("/");
+  expect(res.status).toBe(200);
   expect(res.type).toBe("text/html");
-  expect(res.text).toBe("<h3>Co-make API is live!</h3>")
-  })
+  expect(res.text).toBe("<h3>Co-make API is live!</h3>");
+});
 
 //$$$$$$$$$$$$$$$$$ THESE TESTS WORK $$$$$$$$$$$$$$$$$$$$$$$
 //   const testIssue = {
-  
+
 //     issue: "Newly Created Issue",
 //     issue_description: "I'm an issue description",
 //     hazard_level: 2,
 //     city: "Chicago",
 //     state: "Illinois",
 //     zip_code: 60619
-  
+
 // }
 
-// const user ={ 
-//   username: "User1", 
+// const user ={
+//   username: "User1",
 //   password: "password",
 //   email: "user11@test.com",
 //   first_name: "User1",
@@ -59,15 +58,12 @@ test("Test Route", async () => {
 //           expect(res.type).toBe("application/json");
 //           expect(res.body.user.username).toBe("User1");
 
-
 //         const issues = await supertest(server)
 //         .get("/api/users/1/issues")
 //       expect(issues.status).toBe(200);
 //       expect(issues.type).toBe("application/json");
 //       // expect(issues).toBe(issues[0]);
 //       });
-  
-
 
 //       test("post a new issue", async () => {
 //       await supertest(server)
@@ -115,8 +111,6 @@ test("Test Route", async () => {
 //       //       .post("/api/auth/register")
 //       //       .send(user);
 
-
-
 //       //     const res = await supertest(server)
 //       //       .post("/api/auth/login")
 //       //       .send({ username: "User1", password: "password" });
@@ -136,4 +130,3 @@ test("Test Route", async () => {
 //       //  })
 
 //       });
-

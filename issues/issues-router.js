@@ -4,7 +4,7 @@ const router = require("express").Router({
 const upvotesRouter = require("../upvotes/upvotes-router");
 const commentsRouter = require("../comments/comments-router");
 const restricted = require("../middlewares/restricted");
-const validateId = require("../middlewares/validateId")
+const validateId = require("../middlewares/validateId");
 const validateIssueId = require("../middlewares/validateIssueId");
 const validateIssueEditingRights = require("../middlewares/validateIssueEditingRights");
 const validator = require("../middlewares/validator");
@@ -23,8 +23,7 @@ router.get("/", /*restricted,*/ validateId, async (req, res, next) => {
   }
 });
 
-router.get("/user", /*restricted,*/
-validateId, async (req, res, next) => {
+router.get("/user" /*restricted,*/, validateId, async (req, res, next) => {
   const { id } = req.params;
   try {
     const issues = await db.findByUserId(id);
@@ -47,8 +46,8 @@ router.post(
   validateId,
   async (req, res, next) => {
     try {
-      let { body } = req
-      body = {...body, user_id: Number(req.params.id)}
+      let { body } = req;
+      body = { ...body, user_id: Number(req.params.id) };
       const newissue = await db.add(body);
       res.status(201).json(newissue);
     } catch (err) {
@@ -57,16 +56,20 @@ router.post(
   }
 );
 
-router.get("/:issue_id", /*restricted,*/
-validateId, validateIssueId, async (req, res, next) => {
-  try {
-    const { issue_id } = req.params;
-    const issue = await db.findById(issue_id);
-    res.json(issue);
-  } catch (err) {
-    next(err);
+router.get(
+  "/:issue_id" /*restricted,*/,
+  validateId,
+  validateIssueId,
+  async (req, res, next) => {
+    try {
+      const { issue_id } = req.params;
+      const issue = await db.findById(issue_id);
+      res.json(issue);
+    } catch (err) {
+      next(err);
+    }
   }
-});
+);
 
 router.put(
   "/:issue_id",

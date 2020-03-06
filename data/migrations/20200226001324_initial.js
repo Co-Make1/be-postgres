@@ -30,7 +30,7 @@ exports.up = async function(knex) {
     issues.string("issue_description").notNullable();
     issues.string("photo").unique();
     issues.string("city").notNullable();
-    issues.string("state").notNullable();
+    issues.string("state", 2).notNullable();
     issues.integer("zip_code").notNullable();
     issues
       .integer("user_id")
@@ -51,26 +51,26 @@ exports.up = async function(knex) {
     issues.timestamp("created_at").defaultTo(knex.fn.now());
   });
   await knex.schema.createTable("upvotes", upvotes => {
-    upvotes.increments()
-    upvotes.integer("upvotes")
+    upvotes.increments();
+    upvotes.integer("upvotes");
     upvotes
-    .integer("user_id")
-    .notNullable()
-    .unsigned()
-    .references("id")
-    .inTable("users")
-    .onUpdate("CASCADE")
-    .onDelete("CASCADE")
+      .integer("user_id")
+      .notNullable()
+      .unsigned()
+      .references("id")
+      .inTable("users")
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE");
     upvotes
-    .integer("issue_id")
-    .notNullable()
-    .unsigned()
-    .references("id")
-    .inTable("issues")
-    .onUpdate("CASCADE")
-    .onDelete("CASCADE");
-    upvotes.timestamp("created_at").defaultTo(knex.fn.now())
-  })
+      .integer("issue_id")
+      .notNullable()
+      .unsigned()
+      .references("id")
+      .inTable("issues")
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE");
+    upvotes.timestamp("created_at").defaultTo(knex.fn.now());
+  });
   await knex.schema.createTable("comments", comments => {
     comments.increments();
     comments.string("comment").notNullable();

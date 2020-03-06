@@ -32,7 +32,7 @@ router.get(
   // validateId,
   // validateIssueId,
   async (req, res, next) => {
-    const issue_id  = req.params.issue_id;
+    const { issue_id } = req.params;
     try {
       const comments = await db.findByIssueId(issue_id);
       res.json(comments);

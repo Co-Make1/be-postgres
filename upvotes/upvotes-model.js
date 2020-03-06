@@ -2,8 +2,8 @@ const db = require("../data/db-config");
 
 function findById(id) {
   return db("upvotes")
-    .where({ id }).first()
-;
+    .where({ id })
+    .first();
 }
 
 function findBy(filter) {
@@ -11,14 +11,11 @@ function findBy(filter) {
     .where(filter)
     .select("user_id", "issue_id");
 }
-  
+
 async function add(upvote) {
-
-      const [id] = await db("upvotes").insert(upvote);
-      return { upvote_id: id}
-
-  }
-
+  const [id] = await db("upvotes").insert(upvote);
+  return { upvote_id: id };
+}
 
 function remove(id) {
   return db("upvotes")
