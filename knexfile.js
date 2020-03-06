@@ -1,3 +1,4 @@
+Learn more or give us feedback
 module.exports = {
   development: {
     client: "sqlite3",
@@ -17,9 +18,23 @@ module.exports = {
       }
     }
   },
+  production :{
+    client: "pg",
+    connection: "postgresql://localhost",
+    migrations: {
+      directory: "./data/migrations"
+    },
+    seeds: {
+      directory: "./data/seeds"
+    },
+    pool: {
+      min: 2,
+      max: 20
+    }
+  },
 
   testing: {
-    client: "sqlite3",
+    client: "pg",
     connection: {
       filename: "./data/test.db3"
     },
